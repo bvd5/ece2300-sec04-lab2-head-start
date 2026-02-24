@@ -20,11 +20,16 @@ module FullAdder_GL
   // Implement full adder w/ explicit gate-level modeling
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-  `ECE2300_UNUSED( in0 );
-  `ECE2300_UNUSED( in1 );
-  `ECE2300_UNUSED( cin );
-  `ECE2300_UNDRIVEN( cout );
-  `ECE2300_UNDRIVEN( sum );
+  wire check_in;
+  xor ( check_in, in0, in1 );
+  xor ( sum, check_in, cin );
+
+  wire [2:0] check_c;
+  and ( check_c[0], in0, in1 );
+  and ( check_c[1], in0, cin );
+  and ( check_c[2], in1, cin );
+  or ( cout, check_c[0], check_c[1], check_c[2] );
+
 
 endmodule
 

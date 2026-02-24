@@ -21,11 +21,46 @@ module AdderRippleCarry_4b_GL
   // Implement 4-bit ripple carry adder using FullAdder_GL module
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-  `ECE2300_UNUSED( in0 );
-  `ECE2300_UNUSED( in1 );
-  `ECE2300_UNUSED( cin );
-  `ECE2300_UNDRIVEN( cout );
-  `ECE2300_UNDRIVEN( sum );
+  wire carry0;
+  wire carry1;
+  wire carry2;
+
+  FullAdder_GL fa0 
+  (
+    in0  (in0[0]),
+    in1  (in1[0]),
+    cin  (cin),
+    cout (carry0),
+    sum  (sum[0])
+  );
+
+  FullAdder_GL fa1 
+  (
+    in0  (in0[1]),
+    in1  (in1[1]),
+    cin  (carry0),
+    cout (carry1),
+    sum  (sum[1])
+  );
+
+  FullAdder_GL fa2 
+  (
+    in0  (in0[2]),
+    in1  (in1[2]),
+    cin  (carry1),
+    cout (carry2),
+    sum  (sum[2])
+  );
+
+  FullAdder_GL fa3 
+  (
+    in0  (in0[3]),
+    in1  (in1[3]),
+    cin  (carry2),
+    cout (cout),
+    sum  (sum[3])
+  );
+  
 
 endmodule
 
